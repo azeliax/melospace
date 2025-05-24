@@ -187,8 +187,13 @@ textarea:focus, input:focus{
 }
 
 .music-player {
+<<<<<<< HEAD
   height: 45vh;
   width: 20vw;
+=======
+  height: 100%;
+  width: 200px;
+>>>>>>> 1a691ae (Initial commit)
   background-color: #808080;
 }
 
@@ -211,10 +216,13 @@ textarea:focus, input:focus{
   height: 200px;
   width: 200px;
   background-color: rgb(44, 44, 44);
+<<<<<<< HEAD
 }
 
 .playlist-maker {
   height: 200px;
   width: 200px;
   background-color: rgb(44, 44, 44);
+=======
+>>>>>>> 1a691ae (Initial commit)
 }

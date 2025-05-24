@@ -77,11 +77,16 @@ app.post('/songs', async (req, res) => {
 app.post('/searchsongs', async (req, res) => {
   try {
     const {songQuery} = req.body;
+<<<<<<< HEAD
     const result = await db.query('SELECT * FROM public."Songs" WHERE title ILIKE $1', [`%${songQuery}%`]);
+=======
+    const result = await db.query('SELECT * FROM public."Songs" WHERE title ILIKE $1', [`${songQuery}%`]);
+>>>>>>> 1a691ae (Initial commit)
     res.json({songSearch: result.rows});
   } catch (err) {}
 });
 
+<<<<<<< HEAD
 app.post('/playlistadd', async (req, res) => {
   try {
     const {playlistName} = req.body;
@@ -97,6 +102,8 @@ app.get ('/playlistsync', async (req, res) => {
   } catch (err) {}
 });
 
+=======
+>>>>>>> 1a691ae (Initial commit)
 app.listen(5000, () => {
   console.log('Backend running on http://localhost:5000');
 });

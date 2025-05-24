@@ -85,7 +85,11 @@ export default function MusicPlayer() {
          if (likedSongsArr.includes(titleLiked)) return;
 
          likedSongsArr.push(titleLiked);
+<<<<<<< HEAD
          const node = document.createElement("li");
+=======
+        const node = document.createElement("li");
+>>>>>>> 1a691ae (Initial commit)
           const textNode = document.createTextNode(titleLiked);
           node.appendChild(textNode);
 
