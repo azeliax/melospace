@@ -1,5 +1,5 @@
-import glitch1 from "./graphics/glitch1.png";
-import glitch2 from "./graphics/glitch2.png";
+import glitch1 from "./graphics/glitch3.png";
+import glitch2 from "./graphics/glitch4.png";
 import React, { useState, useEffect } from 'react'
 
 

@@ -17,7 +17,6 @@ const db = new Client({
 db.connect();
 
 app.post('/register', async (req, res) => {
-  console.log('📥 Received register request:', req.body);
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -61,9 +60,7 @@ app.post('/login', async (req, res) => {
       }
 });
 
-
 app.post('/songs', async (req, res) => {
-  console.log('📥 Received request:', req.body);
 
   try {
     const { indexSong } = req.body;
@@ -77,8 +74,15 @@ app.post('/songs', async (req, res) => {
   }
 });
 
+app.post('/searchsongs', async (req, res) => {
+  try {
+    const {songQuery} = req.body;
+    const result = await db.query('SELECT * FROM public."Songs" WHERE title ILIKE $1', [`${songQuery}%`]);
+    res.json({songSearch: result.rows});
+  } catch (err) {}
+});
 
 app.listen(5000, () => {
-  console.log('🚀 Backend running on http://localhost:5000');
+  console.log('Backend running on http://localhost:5000');
 });
 

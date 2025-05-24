@@ -1,21 +1,27 @@
 import './App.css';
 import axios from 'axios';
-import { useState } from "react";
+import { use, useState } from "react";
 
 export default function MusicPlayer() {
     const [playingSong, setPlayingSong] = useState(1);
     const [indexSong, setIndexSong] = useState(1);
     const [stop, setIfStop] = useState(false);
+    const [currentSong, setCurrentSong] = useState(null);
+    const likedSongsArr = [];
 
     const playSong = async (e) => {
         e.preventDefault();
         try {
           const res = await axios.post('http://localhost:5000/songs', { indexSong });
+          const song = res.data?.song;
           const newSong = `/mp3_songs/${res.data?.song?.mp3_track}`;
+          setPlayingSong(newSong);
+          setCurrentSong(song);
+
           const titleDisplay = res.data?.song?.title;
           const artistDisplay = res.data?.song?.artist;
           const coverDisplay = `/album_covers/${res.data?.song?.album}.jpg`;
-          setPlayingSong(newSong);
+          
 
           var audio = document.getElementById('audio');
           var source = document.getElementById('audioSource');
@@ -56,31 +62,34 @@ export default function MusicPlayer() {
     const next = async (e) => {
         e.preventDefault();
         try {
-        setIndexSong(prevIndex => prevIndex + 1);
+            const newIndex = indexSong + 1
+        setIndexSong(newIndex);
         playSong(e); } catch (err) {};
     };
 
     const prev = async (e) => {
         e.preventDefault();
         try {
-        setIndexSong(prevIndex => prevIndex - 1);
-        playSong(e); } catch (err) {};
+            const newIndex = Math.max(indexSong - 1, 1);
+        setIndexSong(newIndex);
+        if (indexSong >= 1) {
+        playSong(e); } } catch (err) {};
     };
 
     const like = async (e) => {
         e.preventDefault();
-        try {
-          const res = await axios.post('http://localhost:5000/songs', { indexSong });
 
-          const titleLiked = res.data?.song?.title;
-          const likedSongs = document.querySelector('.liked-songs')
+         const titleLiked = currentSong.title;
+         const likedSongs = document.querySelector('.liked-songs');
 
-          const node = document.createElement("li");
+         if (likedSongsArr.includes(titleLiked)) return;
+
+         likedSongsArr.push(titleLiked);
+        const node = document.createElement("li");
           const textNode = document.createTextNode(titleLiked);
           node.appendChild(textNode);
 
           likedSongs.appendChild(node);
-        } catch (err) {}
     }
 
     return (
