@@ -1,0 +1,235 @@
+* {
+  margin: 0;
+  font-family: fixedsys;
+  font-weight: bold;
+  color:#808080;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+}
+
+body {
+  height: 96.8vh;
+  background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='50' height='50' patternTransform='scale(3) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='%23000000ff'/><path d='M50 25L37.5 50 25 25 37.5 0zm-25 0L12.5 50 0 25 12.5 0z'  stroke-width='0.5' stroke='%23000dffff' fill='none'/></pattern></defs><rect width='800%' height='800%' transform='translate(-63,-42)' fill='url(%23a)'/></svg>");
+}
+
+.onload {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  animation: disappear 5.5s;
+  animation-fill-mode: forwards ;
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1
+  }
+  80% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.overlay {
+  background-image: url(graphics/glitch3.png);
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.main-div {
+  margin: auto;
+  margin-top: 30px;
+  background-color: #000000;
+  height: 90vh;
+  width: 85%;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+header {
+  background-image: url(graphics/heh.jpg);
+  background-size: contain;
+  border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+.header-sub {
+  text-align: center;
+  font-size: 1.3em;
+  color:rgb(155, 155, 155);
+  padding-bottom: 0.5%;
+  text-shadow: 11px 1px 10px rgb(10, 49, 190);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+}
+
+.border-header {
+  color: rgb(0, 17, 250);
+  overflow: hidden;
+}
+
+h1 {
+  padding-top: 3%;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  font-size: 5em;
+  letter-spacing: 0.09em;
+  color: #0037ff;
+  text-shadow: 11px 1px 10px rgb(10, 49, 190);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgb(255, 255, 255);
+
+}
+
+h1.animation {
+  padding-top: 4%;
+  z-index: 1000000;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation:
+    typing 4.5s steps(40, end);
+}
+
+@keyframes typing {
+  0% {width: 0}
+  50% {width: 100%}
+  100% {width: 0}
+}
+
+.moon {
+  height: 150px;
+}
+
+.image-girl {
+  position: fixed; 
+  bottom: 0px;
+  left: -50px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+input {
+  background-color: rgba(95, 158, 160, 0);
+  border: 1px dashed white;
+  margin-bottom: 3%;
+  height: 11%;
+  width: 80%;
+  padding: 1%;
+}
+
+input::placeholder {
+  padding-left: 3%;
+  color: #808080;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.login, .register {
+  margin-top: 10%;
+  background-color: rgb(3, 3, 3);
+  height: 40vh;
+  width: 45vw;
+  box-shadow: 0px -1px 90px 5px rgba(37, 53, 107, 0.445);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.login-border, .register-border {
+  color: white;
+  font-size: 1.8em;
+  letter-spacing: 0.2em;
+  text-align: left;
+  margin: auto;
+  width: 95%;
+  background-image: url(graphics/heh.jpg);
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border-radius: 5px;
+  margin-bottom: 3%;
+  border-bottom: 8px solid #0037ff;
+}
+
+.login > button {
+  color: white;
+  background: linear-gradient(90deg, rgba(0, 55, 255, 1) 0%, rgb(0, 0, 0) 100%);
+  padding: 2%;
+  width: 40%;
+  border: 1px solid white;
+}
+
+.logo {
+  height: 40%;
+  position: absolute;
+  rotate: calc(-10deg);
+}
+
+.homepage {
+  display: flex;
+  width: 100%;
+  height: 63vh;
+  justify-content: space-between
+}
+
+.music-player {
+  background-color: #555555;
+  padding: 0.5%;
+  height: 50%;
+}
+
+.music-player > img {
+  width: 29%;
+  height: 55%;
+  float: left;
+  margin-right: 10%;
+  border: 3px solid black;
+}
+
+.title, .artist {
+  color: black;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+.cover {
+  width: 50px;
+  height: 50px;
+}
+
+.liked-songs {
+  height: 200px;
+  width: 200px;
+  background-color: rgb(39, 39, 39);
+}
+
+.search-songs {
+  height: 100%;
+  width: 20%;
+  background-color: rgb(44, 44, 44);
+  margin: 0.5%;
+  text-align: center;
+}
+
+.search-songs > input { 
+  margin-top: 5%;
+}
