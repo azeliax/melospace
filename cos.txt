@@ -39,7 +39,7 @@ body {
 
 .overlay {
   background-image: url(graphics/glitch3.png);
-  opacity: 0.4;
+  opacity: 0.2;
   position: absolute;
   top: 0;
   left: 0;
@@ -184,26 +184,31 @@ textarea:focus, input:focus{
 
 .homepage {
   display: flex;
+  width: 100%;
+  height: 63vh;
+  justify-content: space-between
 }
 
 .music-player {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  height: 45vh;
-  width: 20vw;
-=======
-  height: 100%;
-  width: 200px;
->>>>>>> 1a691ae (Initial commit)
-=======
-  height: 100%;
-  width: 200px;
->>>>>>> b11b0f08ec5f033ff391fd72b70015bdd1d0da50
-  background-color: #808080;
+  background-color: #555555;
+  padding: 0.5%;
+  height: 50%;
 }
 
-.title-artist {
+.music-player > img {
+  width: 29%;
+  height: 55%;
+  float: left;
+  margin-right: 10%;
+  border: 3px solid black;
+}
+
+.title, .artist {
   color: black;
+}
+
+.title {
+  font-size: 1.5em;
 }
 
 .cover {
@@ -218,19 +223,13 @@ textarea:focus, input:focus{
 }
 
 .search-songs {
-  height: 200px;
-  width: 200px;
+  height: 100%;
+  width: 20%;
   background-color: rgb(44, 44, 44);
-<<<<<<< HEAD
-<<<<<<< HEAD
+  margin: 0.5%;
+  text-align: center;
 }
 
-.playlist-maker {
-  height: 200px;
-  width: 200px;
-  background-color: rgb(44, 44, 44);
-=======
->>>>>>> 1a691ae (Initial commit)
-=======
->>>>>>> b11b0f08ec5f033ff391fd72b70015bdd1d0da50
+.search-songs > input { 
+  margin-top: 5%;
 }
