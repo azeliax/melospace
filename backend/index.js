@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const { Client } = require('pg');
 
 const app = express();
-app.use(cors());
+app.use(cors({credentials: true}));
 app.use(express.json());
 
 const db = new Client({
@@ -96,6 +96,22 @@ app.get ('/playlistsync', async (req, res) => {
     res.json({playlists: result.rows})
   } catch (err) {}
 });
+
+app.post('/playlistdetails', async (req, res) => {
+  try {
+    const {playlistId} = req.body
+    const result = await db.query('SELECT * FROM public."Songs" as s JOIN public."Playlist_songs" as ps ON s.song_id = ps.song_id WHERE playlist_id = $1', [playlistId]);
+    res.json({songsPlaylist: result.rows})
+  } catch (err) {}
+});
+
+app.post('/addtoplaylist', async (req, res) => {
+  try {
+    const {playlistId, songId} = req.body; 
+    const result = await db.query('INSERT INTO public."Playlist_songs"(playlist_id, song_id) VALUES ($1, $2)', [playlistId, songId]);
+    res.json({addedSong: result.rows[0]});
+  } catch (err) {}
+})
 
 app.listen(5000, () => {
   console.log('Backend running on http://localhost:5000');
