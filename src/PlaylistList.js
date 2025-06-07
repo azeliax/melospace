@@ -10,7 +10,7 @@ export default function PlaylistList({selectedSongId}) {
 
     const showPlaylists = async() => {
         try {
-            const res = await axios.get('http://localhost:5000/playlistsync');
+            const res = await axios.get('https://melospace.onrender.com/playlistsync');
             setPlaylists(res.data.playlists);
         } catch (err) {};
     };
@@ -22,7 +22,7 @@ export default function PlaylistList({selectedSongId}) {
     const addSong = async(id, songId) => {
         try {
             console.log("Trying to add song:", playlistId, selectedSongId); 
-            const res = await axios.post('http://localhost:5000/addtoplaylist', {playlistId: id, songId: songId});
+            const res = await axios.post('https://melospace.onrender.com/addtoplaylist', {playlistId: id, songId: songId});
             console.log("SONG ADDED",res.data);
             showPlaylists();
         } catch (err) {};

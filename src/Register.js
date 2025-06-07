@@ -8,7 +8,7 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post('http://localhost:5000/register', form);
+          const res = await axios.post('https://melospace.onrender.com//register', form);
     
           console.log('Response from server:', res.data);
     

@@ -6,7 +6,7 @@ export default function PlaylistDetails ({playlistId}) {
 
     const showSongs = async() => {
         try {
-            const res = await axios.post('http://localhost:5000/playlistdetails', {playlistId});
+            const res = await axios.post('https://melospace.onrender.com/playlistdetails', {playlistId});
             setSongs(res.data.songsPlaylist);
         } catch (err) {}
     }

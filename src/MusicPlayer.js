@@ -1,95 +1,101 @@
 import './App.css';
 import axios from 'axios';
-import { use, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function MusicPlayer() {
-    const [playingSong, setPlayingSong] = useState(1);
-    const [indexSong, setIndexSong] = useState(1);
+    const [songs, setSongs] = useState([]);
+    const [playingSong, setPlayingSong] = useState(0);
     const [stop, setIfStop] = useState(false);
-    const [currentSong, setCurrentSong] = useState(null);
     const likedSongsArr = [];
 
-    const playSong = async (e) => {
-        e.preventDefault();
-        try {
-          const res = await axios.post('http://localhost:5000/songs', { indexSong });
-          const song = res.data?.song;
-          const newSong = `/mp3_songs/${res.data?.song?.mp3_track}`;
-          setPlayingSong(newSong);
-          setCurrentSong(song);
+    useEffect(() => {
+        const fetchSongs = async () => {
+            try {
+                const res = await axios.get('https://melospace.onrender.com/songs');
+                setSongs(res.data.songs);
+                console.log(songs);
+            } catch (err) {
+                console.error("Error fetching songs:", err);
+            }
+        };
 
-          const titleDisplay = res.data?.song?.title;
-          const artistDisplay = res.data?.song?.artist;
-          const coverDisplay = `/album_covers/${res.data?.song?.album}.jpg`;
-          
+        fetchSongs();
+    }, []);
 
-          var audio = document.getElementById('audio');
-          var source = document.getElementById('audioSource');
-          var title = document.querySelector('.title-artist');
-          var cover = document.querySelector('.cover');
-        
-          cover.src = coverDisplay;
-          title.innerHTML = titleDisplay + ' - ' + artistDisplay;
-          source.src = newSong;
-
-          audio.load()
-          audio.play();
-        } catch (err) {
-          console.error('Error:', err.response?.data || err.message);
+    useEffect(() => {
+        if (songs.length > 0 && stop) {
+            playSongFromIndex(playingSong);
         }
-      };
+    }, [songs, stop]);
 
-    const changeAndStop = async (e) => {
-        e.preventDefault();
+
+    const playSongFromIndex = (index) => {
+        if (!songs[index]) return;
+
+        const song = songs[index];
+        setPlayingSong(index);
         var audio = document.getElementById('audio');
-        
-        try {
-            const stopBtn = document.querySelector('.start-stop');
-            if (stop === false) {
-                setIfStop(true);
-                stopBtn.innerHTML = 'Stop';
-                playSong(e);
-            }
-            else {
-                setIfStop(false);
-                stopBtn.innerHTML = 'Play';
-                audio.pause();
-            }
+        var source = document.getElementById('audioSource');
+        var title = document.querySelector('.title-artist');
+        var cover = document.querySelector('.cover');
 
-        } catch (err) {};
+        const coverDisplay = `/album_covers/${song.album}.jpg`;
+        const newSong = `/mp3_songs/${song.mp3_track}`;
+
+        cover.src = coverDisplay;
+        source.src = newSong;
+
+        title.innerHTML = song.title + ' - ' + song.artist;
+
+        audio.load()
+        audio.play();
     };
 
-    const next = async (e) => {
+    const changeAndStop = (e) => {
         e.preventDefault();
-        try {
-            const newIndex = indexSong + 1
-        setIndexSong(newIndex);
-        playSong(e); } catch (err) {};
+        const audio = document.getElementById('audio');
+        const stopBtn = document.querySelector('.start-stop');
+
+        if (!stop) {
+            setIfStop(true);
+            stopBtn.innerHTML = 'Stop';
+            if (songs.length > 0) playSongFromIndex(playingSong);
+        } else {
+            setIfStop(false);
+            stopBtn.innerHTML = 'Play';
+            audio.pause();
+        }
     };
 
-    const prev = async (e) => {
+
+    const next = (e) => {
         e.preventDefault();
-        try {
-            const newIndex = Math.max(indexSong - 1, 1);
-        setIndexSong(newIndex);
-        if (indexSong >= 1) {
-        playSong(e); } } catch (err) {};
+        if (playingSong + 1 < songs.length) {
+            playSongFromIndex(playingSong + 1);
+        }
+    };
+
+    const prev = (e) => {
+        e.preventDefault();
+        if (playingSong - 1 >= 0) {
+            playSongFromIndex(playingSong - 1);
+        }
     };
 
     const like = async (e) => {
         e.preventDefault();
 
-         const titleLiked = currentSong.title;
-         const likedSongs = document.querySelector('.liked-songs');
+        const titleLiked = "idk";
+        const likedSongs = document.querySelector('.liked-songs');
 
-         if (likedSongsArr.includes(titleLiked)) return;
+        if (likedSongsArr.includes(titleLiked)) return;
 
-         likedSongsArr.push(titleLiked);
+        likedSongsArr.push(titleLiked);
         const node = document.createElement("li");
-          const textNode = document.createTextNode(titleLiked);
-          node.appendChild(textNode);
+        const textNode = document.createTextNode(titleLiked);
+        node.appendChild(textNode);
 
-          likedSongs.appendChild(node);
+        likedSongs.appendChild(node);
     }
 
     return (
@@ -98,7 +104,7 @@ export default function MusicPlayer() {
             <p className='title-artist'>Ttile & artist</p>
             <br></br>
             <audio id="audio" controls>
-                <source id="audioSource" type="audio/mpeg" src={playingSong}></source>
+                <source id="audioSource" type="audio/mpeg"></source>
                 Your browser does not support the audio format.
             </audio>
             <button onClick={prev}>Previous</button>

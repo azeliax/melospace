@@ -12,7 +12,7 @@ export default function SearchSongs() {
         try {
             let query = document.querySelector('.inputQuery').value;
 
-            const res = await axios.post('http://localhost:5000/searchsongs', { songQuery: query});
+            const res = await axios.post('https://melospace.onrender.com/searchsongs', { songQuery: query});
             setSearched(res.data.songSearch);
 
         } catch(err) {}; }

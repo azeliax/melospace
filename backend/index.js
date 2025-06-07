@@ -68,15 +68,11 @@ app.post('/login', async (req, res) => {
       }
 });
 
-app.post('/songs', async (req, res) => {
-
+app.get('/songs', async (req, res) => {
   try {
-    const { indexSong } = req.body;
     const result = await db.query(
-      'SELECT * FROM public."Songs" WHERE song_id = $1', [indexSong]
-    );
-    console.log('Song playing:', result.rows[0]);
-    res.json({ song: result.rows[0] });
+      'SELECT * FROM public."Songs"');
+    res.json({ songs: result.rows });
   } catch (err) {
     console.error('error playing song:', err.message);
   }
