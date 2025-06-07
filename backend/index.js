@@ -10,9 +10,19 @@ app.use(express.json());
 
 const db = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
-db.connect();
+
+db.connect(err => {
+  if (err) {
+    console.error('DB connection error:', err);
+  } else {
+    console.log('DB connected successfully');
+  }
+});
+
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
