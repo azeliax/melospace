@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const { Client } = require('pg');
@@ -8,11 +9,8 @@ app.use(cors({credentials: true}));
 app.use(express.json());
 
 const db = new Client({
-  host: 'localhost',
-  user: 'postgres',
-  port: 3001,
-  password: '123',
-  database: 'Chartly'
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
 });
 db.connect();
 
@@ -113,7 +111,7 @@ app.post('/addtoplaylist', async (req, res) => {
   } catch (err) {}
 })
 
-app.listen(5000, () => {
-  console.log('Backend running on http://localhost:5000');
+app.listen(5432, () => {
+  console.log('Backend running');
 });
 
