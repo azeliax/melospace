@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { Client } = require('pg');
 
 const app = express();
