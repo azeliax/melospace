@@ -30,8 +30,6 @@ export default function MusicPlayer() {
 
 
     const playSongFromIndex = (index) => {
-        if (!songs[index]) return;
-
         const song = songs[index];
         setPlayingSong(index);
         var audio = document.getElementById('audio');
@@ -107,6 +105,7 @@ export default function MusicPlayer() {
                 <source id="audioSource" type="audio/mpeg"></source>
                 Your browser does not support the audio format.
             </audio>
+            <input type="range" value={0} id='progress'></input>
             <button onClick={prev}>Previous</button>
             <button onClick={changeAndStop} className='start-stop'>Play</button>
             <button onClick={next}>Next</button>

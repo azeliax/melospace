@@ -29,7 +29,7 @@ export default function PlaylistList({selectedSongId}) {
     }
 
     return (
-        <div>
+        <div className="playlist-list">
             <ul>
                 {playlists.map((playlist) => (
                     <li key={playlist.playlist_id} onClick={() => {setId(playlist.playlist_id); 

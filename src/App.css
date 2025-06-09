@@ -189,10 +189,26 @@ textarea:focus, input:focus{
   justify-content: space-between
 }
 
+#avatar {
+  height: 120%;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.user-profile {
+  text-align: center;
+  grid-area: 1 / 2 / 2 / 5;
+  height: 10vh;
+}
+
 .music-player {
   background-color: #555555;
   padding: 0.5%;
-  grid-area: 1 / 1 / 3 / 3;
+  grid-area: 2 / 2 / 4 / 4;
+}
+
+.playlist-list {
+  grid-area: 2 / 4 / 4 / 4;
 }
 
 .music-player > img {
@@ -218,19 +234,19 @@ textarea:focus, input:focus{
 
 .liked-songs {
   background-color: rgb(39, 39, 39);
-  grid-area: 1 / 3 / 4 / 4;
+  grid-area: 2 / 3 / 4 / 4;
 
 }
 
 .playlist-maker {
-  grid-area: 1 / 4 / 4 / 5;
+  grid-area: 2 / 4 / 4 / 5;
 }
 
 .search-songs {
   background-color: rgb(44, 44, 44);
   margin: 0.5%;
   text-align: center;
-  grid-area: 1 / 5 / 5 / 6;
+  grid-area: 2 / 5 / 5 / 6;
 }
 
 .search-songs > input { 
