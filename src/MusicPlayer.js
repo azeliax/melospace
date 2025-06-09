@@ -13,7 +13,7 @@ export default function MusicPlayer() {
             try {
                 const res = await axios.get('https://melospace.onrender.com/songs');
                 setSongs(res.data.songs);
-                console.log(songs);
+                console.log(res.data.songs);
             } catch (err) {
                 console.error("Error fetching songs:", err);
             }
@@ -37,11 +37,12 @@ export default function MusicPlayer() {
         var title = document.querySelector('.title-artist');
         var cover = document.querySelector('.cover');
 
-        const coverDisplay = `/album_covers/${song.album}.jpg`;
-        const newSong = `/mp3_songs/${song.mp3_track}`;
+        const coverDisplay = `./album_covers/${song.album}.jpg`;
+        const newSong = `./mp3_songs/${song.mp3_track}`;
 
         cover.src = coverDisplay;
         source.src = newSong;
+        console.log(source.src);
 
         title.innerHTML = song.title + ' - ' + song.artist;
 
