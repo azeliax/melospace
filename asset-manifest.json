@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/melospace/static/css/main.12c6fc98.css",
-    "main.js": "/melospace/static/js/main.bbf07104.js",
+    "main.js": "/melospace/static/js/main.56ca76f6.js",
     "static/media/char.png": "/melospace/static/media/char.926a200a9ba2acd40633.png",
     "static/media/glitch3.png": "/melospace/static/media/glitch3.4440c048eb8089b7eebd.png",
     "static/media/glitch4.png": "/melospace/static/media/glitch4.16eda8e5091d00c93301.png",
@@ -9,10 +9,10 @@
     "static/media/logo.png": "/melospace/static/media/logo.f92e6b49774cd1ad4e85.png",
     "index.html": "/melospace/index.html",
     "main.12c6fc98.css.map": "/melospace/static/css/main.12c6fc98.css.map",
-    "main.bbf07104.js.map": "/melospace/static/js/main.bbf07104.js.map"
+    "main.56ca76f6.js.map": "/melospace/static/js/main.56ca76f6.js.map"
   },
   "entrypoints": [
     "static/css/main.12c6fc98.css",
-    "static/js/main.bbf07104.js"
+    "static/js/main.56ca76f6.js"
   ]
 }
