@@ -25,7 +25,7 @@ function App() {
     <p className='border-header'>╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳</p>
     <main>
     <img src={character} alt="character" height="50%" className='image-girl'/>
-    <Router>
+    <Router basename="/melospace">
       <Routes>
         <Route path="/" element={<Login></Login>} />
         <Route path="/homepage" element={<HomePage></HomePage>}/>
