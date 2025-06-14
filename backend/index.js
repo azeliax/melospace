@@ -75,9 +75,13 @@ app.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-    req.session.user_id = user.user_id;
-
+     req.session.save((err) => {
+    if (err) {
+      console.error('Session save error:', err);
+      return res.status(500).json({ error: 'Session save failed' });
+    }
     res.json({ message: 'Login successful', user: { id: user.user_id, username: user.username } });
+  });
 
   } catch (err) {
     console.error('error login user:', err.message);
