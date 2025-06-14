@@ -4,7 +4,6 @@ const cors = require('cors');
 var bcrypt = require('bcryptjs');
 const { Client } = require('pg');
 const session = require('express-session');
-const pgSession = require('connect-pg-simple')(session);
 
 const app = express();
 app.use(cors({
@@ -30,10 +29,6 @@ db.connect(err => {
 });
 
 app.use(session({
-  store: new pgSession({
-    pool: db,
-    tableName: 'session'
-  }),
   secret: process.env.SESSION_SECRET || 'kim dokja is a god',
   resave: false,
   saveUninitialized: false,
