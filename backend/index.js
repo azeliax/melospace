@@ -8,7 +8,7 @@ const pgSession = require('connect-pg-simple')(session);
 
 const app = express();
 app.use(cors({
-  origin: 'localhost:300/melospace/login',
+  origin: 'http://localhost:3000',
   credentials: true
 }));
 
