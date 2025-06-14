@@ -102,7 +102,7 @@ app.post('/playlistadd', async (req, res) => {
 
 app.get('/playlistsync', async (req, res) => {
   try {
-    const result = await db.query('SELECT playlist_id, name FROM public."Playlists" ORDER BY playlist_id DESC');
+    const result = await db.query('SELECT playlist_id, name FROM public."Playlists" WHERE user_id = $1', [loggedInUser]);
     res.json({ playlists: result.rows })
   } catch (err) { }
 });
