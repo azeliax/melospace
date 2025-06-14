@@ -3,17 +3,12 @@ require('dotenv').config();
 const cors = require('cors');
 var bcrypt = require('bcryptjs');
 const { Client } = require('pg');
-// const session = require('express-session');
+const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
 
 const app = express();
 app.use(cors({ credentials: true }));
 app.use(express.json());
-// app.use(session({
-//   secret: 'kim dokja is a god',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 }
-// }))
 
 const db = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -29,6 +24,20 @@ db.connect(err => {
     console.log('DB connected successfully');
   }
 });
+
+app.use(session({
+  store: new pgSession({
+    pool: db, // Reuse existing db connection
+    tableName: 'session'
+  }),
+  secret: process.env.SESSION_SECRET || 'kim dokja is a god',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false, // Set true if using HTTPS
+    maxAge: 24 * 60 * 60 * 1000 // 1 day
+  }
+}));
 
 
 app.post('/register', async (req, res) => {
@@ -67,7 +76,7 @@ app.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-    // req.session.user_id = user.user_id;
+    req.session.user_id = user.user_id;
 
     res.json({ message: 'Login successful', user: { id: user.user_id, username: user.username } });
 
