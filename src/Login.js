@@ -12,7 +12,7 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const res = await axios.post('https://melospace.onrender.com/login', form, { withCredentials: true });
+          const res = await axios.post('https://melospace.onrender.com/login', form);
     
           console.log('Response from server:', res.data);
     

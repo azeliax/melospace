@@ -6,7 +6,7 @@ export default function UserProfile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get('https://melospace.onrender.com/getusername', { withCredentials: true });
+                const res = await axios.get('https://melospace.onrender.com/getusername');
                 const username = res.data.username;
                 console.log(username)
 

@@ -3,12 +3,11 @@ require('dotenv').config();
 const cors = require('cors');
 var bcrypt = require('bcryptjs');
 const { Client } = require('pg');
-const session = require('express-session');
+let loggedInUser = 0;
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: 'http://localhost:3000'
 }));
 
 app.use(express.json());
@@ -27,17 +26,6 @@ db.connect(err => {
     console.log('DB connected successfully');
   }
 });
-
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'kim dokja is a god',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: false,
-    maxAge: 24 * 60 * 60 * 1000,
-    sameSite: 'lax',
-  }
-}));
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -75,15 +63,9 @@ app.post('/login', async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-    req.session.user_id = user.user_id;
-    console.log('Session before save:', req.session);
+    loggedInUser = user.user_id;
 
-    req.session.save((err) => {
-    if (err) {
-      console.error('Session save error:', err);
-      return res.status(500).json({ error: 'Session save failed' });
-    }
-    res.json({ message: 'Login successful', user: { id: user.user_id, username: user.username } });
+    res.json({ message: 'Login successful', user: { id: user.user_id, username: user.username }
   });
 
   } catch (err) {
@@ -143,9 +125,7 @@ app.post('/addtoplaylist', async (req, res) => {
 
 app.get('/getusername', async (req, res) => {
   try {
-    console.log('Session data:', req.session);
-    const userId = req.session.user_id;
-    const result = await db.query('SELECT username FROM public."Users" WHERE user_id = $1', [userId]);
+    const result = await db.query('SELECT username FROM public."Users" WHERE user_id = $1', [loggedInUser]);
     res.json({username: result.rows[0]?.username});
   } catch (err) {}
 })
