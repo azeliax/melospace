@@ -37,8 +37,8 @@ export default function MusicPlayer() {
         var title = document.querySelector('.title-artist');
         var cover = document.querySelector('.cover');
 
-        const coverDisplay = `./album_covers/${song.album}.jpg`;
-        const newSong = `./mp3_songs/${song.mp3_track}`;
+        const coverDisplay = `${process.env.PUBLIC_URL}/album_covers/${song.album}.jpg`;
+        const newSong = `${process.env.PUBLIC_URL}/mp3_songs/${song.mp3_track}`;
 
         cover.src = coverDisplay;
         source.src = newSong;
