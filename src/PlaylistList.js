@@ -30,15 +30,16 @@ export default function PlaylistList({selectedSongId}) {
 
     return (
         <div className="playlist-list">
-            <ul>
+            
+            <dl>
                 {playlists.map((playlist) => (
-                    <li key={playlist.playlist_id} onClick={() => {setId(playlist.playlist_id); 
-                    addSong(playlist.playlist_id, selectedSongId)}} onMouseEnter={() => {setId(playlist.playlist_id); showDetails(!details)}}>{playlist.name}</li>))}
-                    {details && (
+                    <dt key={playlist.playlist_id} /*onClick={() => {setId(playlist.playlist_id); 
+                    addSong(playlist.playlist_id, selectedSongId)}} onMouseEnter={() => {setId(playlist.playlist_id); showDetails(!details)}}*/>{playlist.name}</dt>))}
+                    {/* {details && (
                     <div>
                         <PlaylistDetails playlistId={playlistId}></PlaylistDetails>
-                    </div> )}
-            </ul>
+                    </div> )} */}
+            </dl>
         </div>
     );
 }

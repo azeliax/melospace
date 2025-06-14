@@ -209,7 +209,23 @@ textarea:focus, input:focus{
 
 .playlist-list {
   grid-area: 2 / 4 / 4 / 4;
+  overflow: auto;
 }
+
+dt {
+  margin: 2%;
+  padding: 5%;
+  background-color:#808080;
+  border-radius: 10px;
+  color: white;
+}
+
+dt:hover {
+  background-color:#555555;
+  color: white;
+}
+
+
 
 .music-player > img {
   width: 30%;
