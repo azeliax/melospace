@@ -8,6 +8,7 @@ export default function UserProfile() {
             try {
                 const res = await axios.get('https://melospace.onrender.com/getusername');
                 const username = res.data.username;
+                console.log(username)
 
                 document.getElementById('welcome-back').innerHTML = 'Welcome back, ' + username + '!';
             } catch (err) {

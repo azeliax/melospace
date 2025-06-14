@@ -34,7 +34,8 @@ export default function MusicPlayer() {
         setPlayingSong(index);
         var audio = document.getElementById('audio');
         var source = document.getElementById('audioSource');
-        var title = document.querySelector('.title-artist');
+        var title = document.querySelector('.title');
+        var artist = document.querySelector('.artist');
         var cover = document.querySelector('.cover');
 
         const coverDisplay = `${process.env.PUBLIC_URL}/album_covers/${song.album}.jpg`;
@@ -42,9 +43,9 @@ export default function MusicPlayer() {
 
         cover.src = coverDisplay;
         source.src = newSong;
-        console.log(source.src);
 
-        title.innerHTML = song.title + ' - ' + song.artist;
+        title.innerHTML = song.title;
+        artist.innerHTML = song.artist;
 
         audio.load()
         audio.play();
@@ -100,16 +101,16 @@ export default function MusicPlayer() {
     return (
         <div className="music-player">
             <img src="#" alt="cover" className='cover'></img>
-            <p className='title-artist'>Ttile & artist</p>
+            <p className='title'>Ttile</p>
+            <p className='artist'>aritst</p>
             <br></br>
             <audio id="audio" controls>
                 <source id="audioSource" type="audio/mpeg"></source>
                 Your browser does not support the audio format.
             </audio>
-            <button onClick={prev}>Previous</button>
+            <button onClick={prev}>&#8249;</button>
             <button onClick={changeAndStop} className='start-stop'>Start</button>
-            <button onClick={next}>Next</button>
-
+            <button onClick={next}>&#8250;</button>
             <button onClick={like} className='like'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0037ff" class="bi bi-heart-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg></button>
             <input type="range" value={0} id='progress'></input>

@@ -233,12 +233,14 @@ dt:hover {
   border: 3px solid black;
 }
 
-.title, .artist {
+.title {
   color: black;
+  font-size: 1.5em;
 }
 
-.title {
-  font-size: 1.5em;
+.artist {
+  background-color: #000000;
+  border-radius: 10px;
 }
 
 .cover {

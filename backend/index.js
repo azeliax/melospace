@@ -7,7 +7,11 @@ const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 
 const app = express();
-app.use(cors({ credentials: true }));
+app.use(cors({
+  origin: 'localhost:300/melospace/login',
+  credentials: true
+}));
+
 app.use(express.json());
 
 const db = new Client({
@@ -27,18 +31,17 @@ db.connect(err => {
 
 app.use(session({
   store: new pgSession({
-    pool: db, // Reuse existing db connection
+    pool: db,
     tableName: 'session'
   }),
   secret: process.env.SESSION_SECRET || 'kim dokja is a god',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Set true if using HTTPS
-    maxAge: 24 * 60 * 60 * 1000 // 1 day
+    secure: false,
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
-
 
 app.post('/register', async (req, res) => {
   const { username, password } = req.body;
@@ -139,7 +142,7 @@ app.get('/getusername', async (req, res) => {
   try {
     const userId = req.session.user_id;
     const result = await db.query('SELECT username FROM public."Users" WHERE user_id = $1', [userId]);
-    res.json({username: result.rows[0]});
+    res.json({username: result.rows[0]?.username});
   } catch (err) {}
 })
 
