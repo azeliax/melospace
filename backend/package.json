@@ -14,7 +14,9 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "pg": "^8.14.1"
+    "pg": "^8.14.1",
+     "express-session": "^1.17.3",
+  "connect-pg-simple": "^7.0.0"
   },
   "nodemonConfig": {
     "watch": [
