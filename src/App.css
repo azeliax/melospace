@@ -115,6 +115,7 @@ h1.animation {
   position: fixed; 
   bottom: 0px;
   left: -50px;
+  pointer-events: none;
 }
 
 main {
@@ -256,7 +257,9 @@ dt:hover {
 }
 
 .playlist-maker {
-  grid-area: 2 / 4 / 4 / 5;
+  margin-top: 4%;
+  grid-area: 4 / 2 / 4/ 3;
+  display: flex;
 }
 
 .search-songs {

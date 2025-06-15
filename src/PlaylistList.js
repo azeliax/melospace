@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import PlaylistDetails from "./PlaylistDetails";
 import LikedSongs from "./LikedSongs";
+import PlaylistMaker from "./PlaylistMaker";
 
 export default function PlaylistList({selectedSongId, setPlaylistId}) {
     const [playlists, setPlaylists] = useState([]);

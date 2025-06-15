@@ -34,17 +34,25 @@ export default function MusicPlayer({playlistId}) {
     }, [playlistId]);
 
     useEffect(() => {
-        if (Array.isArray(songs) && songs.length > 0 && stop) {
+        if (songs.length > 0 && stop) {
         playSongFromIndex(playingSong);
         }
     }, [songs, stop]);
 
     useEffect(() => {
         const audio = audioRef.current;
-        audio.onloadedmetadata = () => {
-            setDuration(audio.duration);
+        if (!audio) return;
+        const handleTimeUpdate = () => {
+            setProgress(audio.currentTime);
         };
-    }, []);
+
+        audio.addEventListener('timeupdate', handleTimeUpdate);
+
+        return () => {
+            audio.removeEventListener('timeupdate', handleTimeUpdate);
+        };
+    }, [songs, playingSong]);
+
 
 
     const playSongFromIndex = (index) => {
@@ -92,7 +100,6 @@ export default function MusicPlayer({playlistId}) {
             audio.play();
         }
     };
-
 
     const next = (e) => {
         e.preventDefault();

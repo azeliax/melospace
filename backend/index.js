@@ -93,7 +93,7 @@ app.post('/searchsongs', async (req, res) => {
 app.post('/playlistadd', async (req, res) => {
   try {
     const { playlistName } = req.body;
-    const result = await db.query('INSERT INTO public."Playlists" (name) VALUES ($1) RETURNING *', [playlistName]);
+    const result = await db.query('INSERT INTO public."Playlists" (name, user_id) VALUES ($1, $2) RETURNING *', [playlistName, loggedInUser]);
     res.json({ newPlaylist: result.rows[0] });
   } catch (err) { }
 });

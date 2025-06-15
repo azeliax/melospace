@@ -17,7 +17,7 @@ export default function HomePage() {
             <MusicPlayer playlistId={playlistId}></MusicPlayer>
             <PlaylistList setPlaylistId={setPlaylistId}></PlaylistList>
             {/* <LikedSongs></LikedSongs> */}
-            {/* <PlaylistMaker></PlaylistMaker> */}
+            <PlaylistMaker></PlaylistMaker>
             <SearchSongs></SearchSongs>
         </div>
     );

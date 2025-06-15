@@ -7,6 +7,7 @@ export default function() {
 
     const addPlaylist = async (e) => {
         e.preventDefault();
+        if (!namePlaylist) return;
         try {
             const res = await axios.post('https://melospace.onrender.com//playlistadd', {playlistName: namePlaylist});
             console.log("Playlist added: ", res.data);
@@ -19,7 +20,6 @@ export default function() {
             <input type="text" placeholder="name" onChange={e => setName(e.target.value)}></input>
             <button type="submit">Create a new playlist</button>
             </form>
-            <PlaylistList></PlaylistList>
         </div>
     );
 }
