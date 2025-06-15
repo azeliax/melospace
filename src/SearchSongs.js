@@ -2,6 +2,7 @@ import axios from 'axios';
 import './App.css';
 import { useState } from "react";
 import PlaylistList from './PlaylistList';
+import PlaylistAddSongs from './PlaylistAddSongs';
 
 export default function SearchSongs() {
     const [search, setSearched] = useState([]);
@@ -29,7 +30,8 @@ export default function SearchSongs() {
                     <p key={searched.song_id} onClick={() => {setPlaylistVis(!playlist); handleSongClick(searched.song_id)}}>{searched.title} - {searched.artist}</p> ))}
                  {playlist && (
                     <div>
-                    <PlaylistList selectedSongId={selectedSongId}/> </div>)}
+                    <PlaylistAddSongs selectedSongId={selectedSongId}></PlaylistAddSongs>
+                    </div>)}
             </div>
         </div>
     );

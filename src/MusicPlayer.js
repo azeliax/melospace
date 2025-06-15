@@ -69,7 +69,7 @@ export default function MusicPlayer({playlistId}) {
             setDuration(audio.duration);
         });
 
-        const coverDisplay = `${process.env.PUBLIC_URL}/album_covers/${song.album}.jpg`;
+        const coverDisplay = `/album_covers/${song.album}.jpg`;
         const newSong = `${process.env.PUBLIC_URL}/mp3_songs/${song.mp3_track}`;
         const newSongAbsoluteURL = new URL(newSong, window.location.origin).href; // idk how it works but it works only liek that
         

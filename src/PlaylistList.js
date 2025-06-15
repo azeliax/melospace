@@ -5,7 +5,7 @@ import PlaylistDetails from "./PlaylistDetails";
 import LikedSongs from "./LikedSongs";
 import PlaylistMaker from "./PlaylistMaker";
 
-export default function PlaylistList({selectedSongId, setPlaylistId}) {
+export default function PlaylistList({setPlaylistId}) {
     const [playlists, setPlaylists] = useState([]);
     const [details, showDetails] = useState(false);
     const [liked, showLiked] = useState(false);
@@ -22,23 +22,13 @@ export default function PlaylistList({selectedSongId, setPlaylistId}) {
         showPlaylists();
     }, []);
 
-    const addSong = async(id, songId) => {
-        try {
-            console.log("Trying to add song:", playlistId, selectedSongId); 
-            const res = await axios.post('https://melospace.onrender.com/addtoplaylist', {playlistId: id, songId: songId});
-            console.log("SONG ADDED",res.data);
-            showPlaylists();
-        } catch (err) {};
-    }
-
     return (
         <div className="playlist-container">
         <div className="playlist-list">
             <dl>
                 <dt onClick={() => showLiked(!liked)}>Liked</dt>
                 {playlists.map((playlist) => (
-                    <dt key={playlist.playlist_id} onClick={() => { setId(playlist.playlist_id); showDetails(!details); setPlaylistId(playlist.playlist_id);}} /*onClick={() => {setId(playlist.playlist_id); 
-                    addSong(playlist.playlist_id, selectedSongId)}} onMouseEnter={() => {setId(playlist.playlist_id); showDetails(!details)}}*/>{playlist.name}</dt>))}
+                    <dt key={playlist.playlist_id} onClick={() => { setId(playlist.playlist_id); showDetails(!details); setPlaylistId(playlist.playlist_id);}}>{playlist.name}</dt>))}
             </dl>
         </div>
             {details && (

@@ -9,8 +9,9 @@ export default function() {
         e.preventDefault();
         if (!namePlaylist) return;
         try {
-            const res = await axios.post('https://melospace.onrender.com//playlistadd', {playlistName: namePlaylist});
+            const res = await axios.post('https://melospace.onrender.com/playlistadd', {playlistName: namePlaylist});
             console.log("Playlist added: ", res.data);
+            window.location.reload(false);
         } catch (err) {};
     }
 
