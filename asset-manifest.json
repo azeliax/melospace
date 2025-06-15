@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/melospace/static/css/main.3a74a113.css",
-    "main.js": "/melospace/static/js/main.36322591.js",
+    "main.css": "/melospace/static/css/main.acbb5f42.css",
+    "main.js": "/melospace/static/js/main.3c9546a0.js",
     "static/media/char.png": "/melospace/static/media/char.926a200a9ba2acd40633.png",
     "static/media/glitch3.png": "/melospace/static/media/glitch3.4440c048eb8089b7eebd.png",
     "static/media/glitch4.png": "/melospace/static/media/glitch4.16eda8e5091d00c93301.png",
     "static/media/heh.jpg": "/melospace/static/media/heh.d2f634d48f6c52a15641.jpg",
     "static/media/logo.png": "/melospace/static/media/logo.f92e6b49774cd1ad4e85.png",
     "index.html": "/melospace/index.html",
-    "main.3a74a113.css.map": "/melospace/static/css/main.3a74a113.css.map",
-    "main.36322591.js.map": "/melospace/static/js/main.36322591.js.map"
+    "main.acbb5f42.css.map": "/melospace/static/css/main.acbb5f42.css.map",
+    "main.3c9546a0.js.map": "/melospace/static/js/main.3c9546a0.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a74a113.css",
-    "static/js/main.36322591.js"
+    "static/css/main.acbb5f42.css",
+    "static/js/main.3c9546a0.js"
   ]
 }
