@@ -25,9 +25,9 @@ export default function SearchSongs() {
     return (
         <div className="search-songs">
             <input type="text" onInput={searchSongs} className='inputQuery'></input>
-            <div className='test'>
+            <div>
                 {search.map((searched) => (
-                    <p key={searched.song_id} onClick={() => {setPlaylistVis(!playlist); handleSongClick(searched.song_id)}}>{searched.title} - {searched.artist}</p> ))}
+                    <p className="song" key={searched.song_id} onClick={() => {setPlaylistVis(!playlist); handleSongClick(searched.song_id)}}>{searched.title} - {searched.artist}</p> ))}
                  {playlist && (
                     <div>
                     <PlaylistAddSongs selectedSongId={selectedSongId}></PlaylistAddSongs>
