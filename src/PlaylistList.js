@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import PlaylistDetails from "./PlaylistDetails";
 import LikedSongs from "./LikedSongs";
 
-export default function PlaylistList({selectedSongId}) {
+export default function PlaylistList({selectedSongId, setPlaylistId}) {
     const [playlists, setPlaylists] = useState([]);
     const [details, showDetails] = useState(false);
     const [liked, showLiked] = useState(false);
@@ -36,7 +36,7 @@ export default function PlaylistList({selectedSongId}) {
             <dl>
                 <dt onClick={() => showLiked(!liked)}>Liked</dt>
                 {playlists.map((playlist) => (
-                    <dt key={playlist.playlist_id} onClick={() => { setId(playlist.playlist_id); showDetails(!details); }} /*onClick={() => {setId(playlist.playlist_id); 
+                    <dt key={playlist.playlist_id} onClick={() => { setId(playlist.playlist_id); showDetails(!details); setPlaylistId(playlist.playlist_id);}} /*onClick={() => {setId(playlist.playlist_id); 
                     addSong(playlist.playlist_id, selectedSongId)}} onMouseEnter={() => {setId(playlist.playlist_id); showDetails(!details)}}*/>{playlist.name}</dt>))}
             </dl>
         </div>

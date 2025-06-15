@@ -108,7 +108,7 @@ app.get('/playlistsync', async (req, res) => {
 app.post('/playlistdetails', async (req, res) => {
   try {
     const { playlistId } = req.body
-    const result = await db.query('SELECT * FROM public."Songs" as s JOIN public."Playlist_songs" as ps ON s.song_id = ps.song_id WHERE playlist_id = $1', [playlistId]);
+    const result = await db.query('SELECT DISTINCT ON (s.song_id) * FROM public."Songs" as s JOIN public."Playlist_songs" as ps ON s.song_id = ps.song_id WHERE playlist_id = $1', [playlistId]);
     res.json({ songsPlaylist: result.rows })
   } catch (err) { }
 });

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from "react";
 import PlaylistDetails from './PlaylistDetails';
 
-export default function MusicPlayer() {
+export default function MusicPlayer({playlistId}) {
     const [songs, setSongs] = useState([]);
     const [playingSong, setPlayingSong] = useState(0);
     const [stop, setIfStop] = useState(false);
@@ -18,22 +18,24 @@ export default function MusicPlayer() {
 
     useEffect(() => {
         const fetchSongs = async () => {
+            console.log(playlistId);
+            if (!playlistId) return; 
             try {
-                const res = await axios.get('https://melospace.onrender.com/songs');
-                setSongs(res.data.songs);
+                const res = await axios.post('https://melospace.onrender.com/playlistdetails', {playlistId});
+                setSongs(res.data.songsPlaylist);
                 setIfStop(true);
-                console.log(res.data.songs);
+                console.log(res.data.songsPlaylist);
             } catch (err) {
                 console.error("Error fetching songs:", err);
             }
         };
 
         fetchSongs();
-    }, []);
+    }, [playlistId]);
 
     useEffect(() => {
-        if (songs.length > 0 && stop) {
-            playSongFromIndex(playingSong);
+        if (Array.isArray(songs) && songs.length > 0 && stop) {
+        playSongFromIndex(playingSong);
         }
     }, [songs, stop]);
 
@@ -47,6 +49,7 @@ export default function MusicPlayer() {
 
     const playSongFromIndex = (index) => {
         const song = songs[index];
+        if (!songs || songs.length === 0 || !songs[index]) return;
         setPlayingSong(index);
         const audio = audioRef.current;
         const source = sourceRef.current;
@@ -94,6 +97,7 @@ export default function MusicPlayer() {
     const next = (e) => {
         e.preventDefault();
         if (playingSong + 1 < songs.length) {
+            setProgress(0);
             playSongFromIndex(playingSong + 1);
         }
     };
@@ -101,6 +105,7 @@ export default function MusicPlayer() {
     const prev = (e) => {
         e.preventDefault();
         if (playingSong - 1 >= 0) {
+            setProgress(0);
             playSongFromIndex(playingSong - 1);
         }
     };
