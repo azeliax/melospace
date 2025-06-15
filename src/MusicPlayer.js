@@ -1,18 +1,27 @@
 import './App.css';
 import axios from 'axios';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import PlaylistDetails from './PlaylistDetails';
 
 export default function MusicPlayer() {
     const [songs, setSongs] = useState([]);
     const [playingSong, setPlayingSong] = useState(0);
     const [stop, setIfStop] = useState(false);
     const likedSongsArr = [];
+    const [progress, setProgress] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const audioRef = useRef(null);
+    const sourceRef = useRef(null);
+    const titleRef = useRef(null);
+    const artistRef = useRef(null);
+    const coverRef = useRef(null);
 
     useEffect(() => {
         const fetchSongs = async () => {
             try {
                 const res = await axios.get('https://melospace.onrender.com/songs');
                 setSongs(res.data.songs);
+                setIfStop(true);
                 console.log(res.data.songs);
             } catch (err) {
                 console.error("Error fetching songs:", err);
@@ -28,42 +37,56 @@ export default function MusicPlayer() {
         }
     }, [songs, stop]);
 
+    useEffect(() => {
+        const audio = audioRef.current;
+        audio.onloadedmetadata = () => {
+            setDuration(audio.duration);
+        };
+    }, []);
+
 
     const playSongFromIndex = (index) => {
         const song = songs[index];
         setPlayingSong(index);
-        var audio = document.getElementById('audio');
-        var source = document.getElementById('audioSource');
-        var title = document.querySelector('.title');
-        var artist = document.querySelector('.artist');
-        var cover = document.querySelector('.cover');
+        const audio = audioRef.current;
+        const source = sourceRef.current;
+        const title = titleRef.current;
+        const artist = artistRef.current;
+        const cover = coverRef.current;
+
+        audio.addEventListener("loadedmetadata", () => {
+            setDuration(audio.duration);
+        });
 
         const coverDisplay = `${process.env.PUBLIC_URL}/album_covers/${song.album}.jpg`;
         const newSong = `${process.env.PUBLIC_URL}/mp3_songs/${song.mp3_track}`;
-
+        const newSongAbsoluteURL = new URL(newSong, window.location.origin).href; // idk how it works but it works only liek that
+        
         cover.src = coverDisplay;
-        source.src = newSong;
-
         title.innerHTML = song.title;
         artist.innerHTML = song.artist;
 
-        audio.load()
+        if (source.src !== newSongAbsoluteURL) {
+            source.src = newSong;
+            audio.load(); 
+        }
+
         audio.play();
     };
 
     const changeAndStop = (e) => {
         e.preventDefault();
-        const audio = document.getElementById('audio');
+        const audio = audioRef.current;
         const stopBtn = document.querySelector('.start-stop');
 
-        if (!stop) {
-            setIfStop(true);
-            stopBtn.innerHTML = 'Stop';
-            if (songs.length > 0) playSongFromIndex(playingSong);
-        } else {
+        if (stop) {
             setIfStop(false);
             stopBtn.innerHTML = 'Play';
             audio.pause();
+        } else {
+            setIfStop(true);
+            stopBtn.innerHTML = 'Stop';
+            audio.play();
         }
     };
 
@@ -100,20 +123,22 @@ export default function MusicPlayer() {
 
     return (
         <div className="music-player">
-            <img src="#" alt="cover" className='cover'></img>
-            <p className='title'>Ttile</p>
-            <p className='artist'>aritst</p>
+            <img ref={coverRef} src="#" alt="cover" className='cover'></img>
+            <p ref={titleRef} className='title'>Title</p>
+            <p ref={artistRef} className='artist'>Artist</p>
             <br></br>
-            <audio id="audio" controls>
-                <source id="audioSource" type="audio/mpeg"></source>
+            <audio ref={audioRef} id="audio" controls>
+                <source ref={sourceRef} id="audioSource" type="audio/mpeg"></source>
                 Your browser does not support the audio format.
             </audio>
+            <input type="range" value={progress} max={duration} onChange={(e) => {setProgress(e.target.value); audioRef.current.currentTime = e.target.value}} id='progress'></input><br></br>
+            <div className='audio-controls'>
             <button onClick={prev}>&#8249;</button>
             <button onClick={changeAndStop} className='start-stop'>Start</button>
             <button onClick={next}>&#8250;</button>
             <button onClick={like} className='like'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0037ff" class="bi bi-heart-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg></button>
-            <input type="range" value={0} id='progress'></input>
+            </div>
         </div>
     )
 }

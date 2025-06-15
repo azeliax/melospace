@@ -6,16 +6,19 @@ import PlaylistMaker from "./PlaylistMaker";
 import PlaylistDetails from "./PlaylistDetails";
 import UserProfile from "./UserProfile";
 import PlaylistList from "./PlaylistList";
+import { useState } from "react";
 
 export default function HomePage() {
+    const [playlistSongs, setPlayingSongs] = useState([]);
+
     return (
         <div className="homepage">
             <UserProfile></UserProfile>
-            <MusicPlayer></MusicPlayer>
-            <PlaylistList></PlaylistList>
-            {/* <LikedSongs></LikedSongs>
-            <PlaylistMaker></PlaylistMaker>
-            <SearchSongs></SearchSongs> */}
+            <MusicPlayer songs={playlistSongs}></MusicPlayer>
+            <PlaylistList onPlaylistSelect={setPlayingSongs}></PlaylistList>
+            {/* <LikedSongs></LikedSongs> */}
+            {/* <PlaylistMaker></PlaylistMaker> */}
+            <SearchSongs></SearchSongs>
         </div>
     );
 };

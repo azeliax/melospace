@@ -28,22 +28,22 @@ db.connect(err => {
 });
 
 app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password} = req.body;
 
   if (!username || !password) {
-    return res.status(400).json({ error: 'Missing username or password' });
+    return;
   }
 
   try {
     const hash = await bcrypt.hash(password, 10);
     const result = await db.query(
-      'INSERT INTO public."Users" (username, password) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO public."Users" (username, password) VALUES ($1, $2) ON CONFLICT (username) DO NOTHING RETURNING *',
       [username, hash]
     );
     console.log('New user:', result.rows[0]);
     res.json({ user: result.rows[0] });
   } catch (err) {
-    console.error('rror inserting user:', err.message);
+    console.error('error inserting user:', err.message);
     res.status(500).json({ error: err.message });
   }
 });

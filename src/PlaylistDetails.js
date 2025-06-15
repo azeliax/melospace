@@ -18,11 +18,11 @@ export default function PlaylistDetails ({playlistId}) {
 
     return (
         <div className="playlist-details">
-            <ul>
+            <ol>
                 {songs.map((song) => (
                     <li key={song.id}>{song.title}</li>
                 ))}
-            </ul>
+            </ol>
         </div>
     );
 }

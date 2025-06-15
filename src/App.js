@@ -18,9 +18,9 @@ function App() {
     <header>
     <h1>Welcome to Melospace</h1>
     <p className='header-sub'>Disover the magic of melody</p>
-    <div className='onload'>
+    {/* <div className='onload'>
       <h1 className='animation'>Welcome to Melospace</h1>
-    </div>
+    </div> */}
     </header>
     <p className='border-header'>╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳</p>
     <main>

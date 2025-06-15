@@ -36,8 +36,8 @@ export default function Login() {
             </div>
             <input type="text" placeholder="> Name" onChange={e => setForm({ ...form, username: e.target.value })}></input><br></br>
             <input type="password" placeholder="> Password" onChange={e => setForm({ ...form, password: e.target.value })}></input><br></br>
-            <button type="submit">Login</button>
-            <button onClick={navigateRegister}>Register here</button>
+            <button type="submit" className='submit-form'>Login</button>
+            <button onClick={navigateRegister} className='submit-form'>Register here</button>
         </div>
         </form>
     );

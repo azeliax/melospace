@@ -2,10 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import PlaylistDetails from "./PlaylistDetails";
+import LikedSongs from "./LikedSongs";
 
 export default function PlaylistList({selectedSongId}) {
     const [playlists, setPlaylists] = useState([]);
     const [details, showDetails] = useState(false);
+    const [liked, showLiked] = useState(false);
     const [playlistId, setId] = useState(null);
 
     const showPlaylists = async() => {
@@ -29,17 +31,24 @@ export default function PlaylistList({selectedSongId}) {
     }
 
     return (
+        <div className="playlist-container">
         <div className="playlist-list">
-            
             <dl>
+                <dt onClick={() => showLiked(!liked)}>Liked</dt>
                 {playlists.map((playlist) => (
-                    <dt key={playlist.playlist_id} /*onClick={() => {setId(playlist.playlist_id); 
+                    <dt key={playlist.playlist_id} onClick={() => { setId(playlist.playlist_id); showDetails(!details); }} /*onClick={() => {setId(playlist.playlist_id); 
                     addSong(playlist.playlist_id, selectedSongId)}} onMouseEnter={() => {setId(playlist.playlist_id); showDetails(!details)}}*/>{playlist.name}</dt>))}
-                    {/* {details && (
-                    <div>
-                        <PlaylistDetails playlistId={playlistId}></PlaylistDetails>
-                    </div> )} */}
             </dl>
+        </div>
+            {details && (
+                <div>
+                    <PlaylistDetails playlistId={playlistId}></PlaylistDetails>
+                </div>)}
+            {liked && (
+                <div>
+                    <LikedSongs></LikedSongs>
+                </div>
+            )}
         </div>
     );
 }
