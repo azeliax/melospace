@@ -38,6 +38,7 @@ app.post('/register', async (req, res) => {
       'INSERT INTO public."Users" (username, password) VALUES ($1, $2) ON CONFLICT (username) DO NOTHING RETURNING *',
       [username, hash]
     );
+    await db.query('INSERT INTO public."Playlists"(user_id, name) VALUES ($1, $2)', [result.rows[0].user_id, 'Liked']);
     console.log('New user:', result.rows[0]);
     res.json({ user: result.rows[0] });
   } catch (err) {
