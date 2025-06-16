@@ -1,6 +1,5 @@
 import Register from "./Register";
 import MusicPlayer from "./MusicPlayer";
-import LikedSongs from "./LikedSongs";
 import SearchSongs from "./SearchSongs";
 import PlaylistMaker from "./PlaylistMaker";
 import PlaylistDetails from "./PlaylistDetails";
@@ -16,7 +15,6 @@ export default function HomePage() {
             <UserProfile></UserProfile>
             <MusicPlayer playlistId={playlistId}></MusicPlayer>
             <PlaylistList setPlaylistId={setPlaylistId}></PlaylistList>
-            {/* <LikedSongs></LikedSongs> */}
             <PlaylistMaker></PlaylistMaker>
             <SearchSongs></SearchSongs>
         </div>

@@ -1,5 +1,4 @@
 import './App.css';
-import LikedSongs from './LikedSongs';
 import Login from './Login';
 import MusicPlayer from './MusicPlayer';
 import Register from './Register';

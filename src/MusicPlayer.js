@@ -7,7 +7,6 @@ export default function MusicPlayer({playlistId}) {
     const [songs, setSongs] = useState([]);
     const [playingSong, setPlayingSong] = useState(0);
     const [stop, setIfStop] = useState(false);
-    const likedSongsArr = [];
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const audioRef = useRef(null);
@@ -117,22 +116,6 @@ export default function MusicPlayer({playlistId}) {
         }
     };
 
-    const like = async (e) => {
-        e.preventDefault();
-
-        const titleLiked = "idk";
-        const likedSongs = document.querySelector('.liked-songs');
-
-        if (likedSongsArr.includes(titleLiked)) return;
-
-        likedSongsArr.push(titleLiked);
-        const node = document.createElement("li");
-        const textNode = document.createTextNode(titleLiked);
-        node.appendChild(textNode);
-
-        likedSongs.appendChild(node);
-    }
-
     return (
         <div className="music-player">
             <img ref={coverRef} src="#" alt="cover" className='cover'></img>
@@ -148,8 +131,8 @@ export default function MusicPlayer({playlistId}) {
             <button onClick={prev}>&#8249;</button>
             <button onClick={changeAndStop} className='start-stop'>Start</button>
             <button onClick={next}>&#8250;</button>
-            <button onClick={like} className='like'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0037ff" class="bi bi-heart-fill" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg></button>
+            {/* <button onClick={like} className='like'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0037ff" class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/></svg></button> */}
             </div>
         </div>
     )
